@@ -1,45 +1,45 @@
 // services/auth.js
 
-const API_URL = 'http://localhost:8080'; // Substitua pelo endereço da sua API
+const API_URL = 'http://localhost:8080';
 
 const authService = {
   login: async (username, password) => {
-    const response = await fetch(`${API_URL}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username, password })
-    });
+    try {
+      const response = await fetch(`${API_URL}/login`, { // Endpoint de login
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Erro ao fazer login');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Credenciais inválidas');
+      }
+
+      const userData = await response.json();
+      localStorage.setItem('token', userData.token); // Armazenar token no localStorage
+      localStorage.setItem('user', JSON.stringify(userData.user)); // Armazenar dados do usuário
+      return userData.user; 
+    } catch (error) {
+      throw error; // Propagar o erro para o componente que chamou a função
     }
-
-    const userData = await response.json();
-    // Armazene o token no localStorage ou sessionStorage
-    localStorage.setItem('token', userData.token);
-    return userData;
   },
 
   getCurrentUser: async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('Usuário não autenticado');
-    }
-
-    const response = await fetch(`${API_URL}/users/current`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        return null; // Usuário não autenticado
       }
-    });
 
-    if (!response.ok) {
-      throw new Error('Erro ao buscar dados do usuário');
+      const user = JSON.parse(localStorage.getItem('user'));
+      return user; 
+    } catch (error) {
+      console.error('Erro ao obter dados do usuário:', error);
+      return null;
     }
-
-    return response.json();
   }
 };
 
