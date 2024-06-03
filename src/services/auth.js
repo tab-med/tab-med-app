@@ -40,6 +40,29 @@ const authService = {
       console.error('Erro ao obter dados do usuário:', error);
       return null;
     }
+  },
+
+  logout: async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        return; // Usuário já deslogado
+      }
+
+      // Opcional: Fazer uma requisição para o endpoint de logout da API
+      // await fetch(`${API_URL}/logout`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Authorization': `Bearer ${token}`
+      //   }
+      // });
+
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+      // Lógica para lidar com o erro (ex: exibir uma mensagem para o usuário)
+    }
   }
 };
 
