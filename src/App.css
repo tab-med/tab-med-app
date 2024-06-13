@@ -6,3 +6,8 @@ p {
   color: #fff;
   text-align: center;
 }
+
+.App {
+  text-align: center;
+  font-family: sans-serif; /* Ou escolha a fonte que preferir */
+}

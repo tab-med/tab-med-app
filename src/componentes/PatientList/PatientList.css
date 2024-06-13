@@ -1,0 +1,21 @@
+/* .patient-list-container {  } */
+  
+  .patient-list-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .patient-list-container li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .patient-list-container li span {
+    cursor: pointer;
+  }
+  
+ /* .patient-list-container button {  } */
+  
