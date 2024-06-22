@@ -1,6 +1,6 @@
 // services/auth.js
 
-//const API_URL = 'http://localhost:8080';
+// const API_URL = 'http://localhost:8080';
 
 const authService = {
   login: async (username, password) => {

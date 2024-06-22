@@ -53,7 +53,6 @@ function PatientList() {
   const handlePatientSaved = () => {
     setShowForm(false);
     setSelectedPatient(null);
-    // Atualiza a lista de pacientes após salvar
     patientService.getAllPatients().then(data => setPatients(data));
   };
 

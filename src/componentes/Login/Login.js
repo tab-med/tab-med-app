@@ -14,7 +14,6 @@ function Login() {
 
     try {
       const user = await authService.login(username, password);
-      // Redirecionar para a página principal ou armazenar o token
       console.log('Usuário autenticado:', user);
     } catch (err) {
       setError(err.message || 'Erro ao fazer login');

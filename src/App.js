@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Login from './components/Login/Login';
-import MainPage from './components/MainPage/MainPage';
+import Login from './componentes/Login/Login';
+import MainPage from './componentes/MainPage/MainPage';
 import authService from './services/auth';
 
 function App() {
